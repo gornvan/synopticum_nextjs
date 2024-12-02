@@ -57,4 +57,12 @@ export const styles = {
       margin: '10px 0',
       textAlign: centerText,
     },
+    button: {
+      backgroundColor: "#007BFF",
+      color: "white",
+      padding: "10px 20px",
+      border: "none",
+      borderRadius: "4px",
+      cursor: "pointer",
+    },
   };
