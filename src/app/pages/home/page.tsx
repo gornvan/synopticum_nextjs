@@ -2,30 +2,32 @@ import Image from "next/image";
 
 import React from 'react';
 import Link from 'next/link';  // Import Link for internal navigation in Next.js
-import { styles } from '@/app/styles/mainStyles';
+import { mainStyles } from '@/app/styles/mainStyles';
 import { HomePageProps } from "./HomePageProps";
+import UserProfileButton from "@/app/account/components/userProfileButton/UserProfileButton";
 
 // Hello page: accept the current user
 // if user provided - show their name
 // if null - show "Anonymous"
 
-const Navigation: React.FC = () => {
+const Navigation: React.FC<HomePageProps> = ({user}) => {
   return (
-    <nav style={styles.navBar}>
-      <ul style={styles.navList}>
+    <nav style={mainStyles.navBar}>
+      <ul style={mainStyles.navList}>
         <li>
-          <Link href="/" style={styles.navLink}>Home</Link>
+          <Link href="/" style={mainStyles.navLink}>Home</Link>
         </li>
         <li>
-          <Link href="/about" style={styles.navLink}>About</Link>
+          <Link href="/about" style={mainStyles.navLink}>About</Link>
         </li>
         <li>
-          <Link href="/forecast" style={styles.navLink}>Forecast</Link>
+          <Link href="/forecast" style={mainStyles.navLink}>Forecast</Link>
         </li>
         <li>
-          <Link href="/contact" style={styles.navLink}>Contact</Link>
+          <Link href="/contact" style={mainStyles.navLink}>Contact</Link>
         </li>
       </ul>
+      <UserProfileButton user={user}/>
     </nav>
   );
 };
@@ -33,29 +35,29 @@ const Navigation: React.FC = () => {
 // HomePage Component
 const HomePage: React.FC<HomePageProps> = ({ user }) => {
   return (
-    <div style={styles.container}>
-      <Navigation />
-      <header style={styles.header}>
-        <h1 style={styles.title}>Welcome to Synopticum!</h1>
-        <p style={styles.intro}>
+    <div style={mainStyles.container}>
+      <Navigation user={user}/>
+      <header style={mainStyles.header}>
+        <h1 style={mainStyles.title}>Welcome to Synopticum!</h1>
+        <p style={mainStyles.intro}>
           The most advanced weather forecasting application! Get real-time weather data and forecasts for countries and cities around the world.
         </p>
         {user ? (
-          <h2 style={styles.greeting}>Hello, {user.name}! Welcome back to Synopticum!</h2>
+          <h2 style={mainStyles.greeting}>Hello, {user.name}! Welcome back to Synopticum!</h2>
         ) : (
-          <h2 style={styles.greeting}>Explore the world with accurate, real-time weather forecasts.</h2>
+          <h2 style={mainStyles.greeting}>Explore the world with accurate, real-time weather forecasts.</h2>
         )}
       </header>
-      <section style={styles.features}>
-        <div style={styles.featureBox}>
+      <section style={mainStyles.features}>
+        <div style={mainStyles.featureBox}>
           <h3>Global Coverage</h3>
           <p>Access weather forecasts for thousands of cities and countries worldwide.</p>
         </div>
-        <div style={styles.featureBox}>
+        <div style={mainStyles.featureBox}>
           <h3>Real-time Data</h3>
           <p>Stay up-to-date with the most accurate and current weather data.</p>
         </div>
-        <div style={styles.featureBox}>
+        <div style={mainStyles.featureBox}>
           <h3>Customizable Alerts</h3>
           <p>Set alerts and notifications based on your preferred locations and weather conditions.</p>
         </div>

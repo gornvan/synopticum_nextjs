@@ -1,6 +1,6 @@
 const centerText = 'center' as 'center';
 
-export const styles = {
+export const mainStyles = {
     container: {
       fontFamily: "'Arial', sans-serif",
       textAlign: centerText, // Explicitly cast the value
@@ -8,21 +8,27 @@ export const styles = {
       padding: '20px',
     },
     navBar: {
-      backgroundColor: '#007BFF',
-      padding: '10px 0',
+      display: "flex",
+      justifyContent: "space-between", // Distribute items across the navigation bar
+      alignItems: "center",
+      padding: "10px 20px",
+      backgroundColor: "#333", // Dark background for the navbar
+      color: "#fff",
+      boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
     },
     navList: {
-      listStyle: 'none',
+      display: "flex",
+      listStyleType: "none",
       margin: 0,
       padding: 0,
-      display: 'flex',
-      justifyContent: 'center',
     },
     navLink: {
-      color: 'white',
-      textDecoration: 'none',
-      margin: '0 15px',
-      fontSize: '16px',
+      color: "white",
+      textDecoration: "none",
+      padding: "10px 20px",
+      fontSize: "16px",
+      display: "inline-block",
+      textAlign: "center",
     },
     header: {
       marginTop: '30px',
@@ -64,5 +70,9 @@ export const styles = {
       border: "none",
       borderRadius: "4px",
       cursor: "pointer",
+    },
+    icon: {
+      marginRight: "8px",
+      fontSize: "18px",
     },
   };
