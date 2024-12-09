@@ -1,34 +1,34 @@
-const centerText = 'center' as 'center';
+const centerText = 'center' as const;
 
 export const mainStyles = {
     container: {
-      fontFamily: "'Arial', sans-serif",
+      fontFamily: 'Arial, sans-serif',
       textAlign: centerText, // Explicitly cast the value
       backgroundColor: '#f4f4f9',
       padding: '20px',
     },
     navBar: {
-      display: "flex",
-      justifyContent: "space-between", // Distribute items across the navigation bar
-      alignItems: "center",
-      padding: "10px 20px",
-      backgroundColor: "#333", // Dark background for the navbar
-      color: "#fff",
-      boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+      display: 'flex',
+      justifyContent: 'space-between', // Distribute items across the navigation bar
+      alignItems: 'center',
+      padding: '10px 20px',
+      backgroundColor: '#333', // Dark background for the navbar
+      color: '#fff',
+      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
     },
     navList: {
-      display: "flex",
-      listStyleType: "none",
+      display: 'flex',
+      listStyleType: 'none',
       margin: 0,
       padding: 0,
     },
     navLink: {
-      color: "white",
-      textDecoration: "none",
-      padding: "10px 20px",
-      fontSize: "16px",
-      display: "inline-block",
-      textAlign: "center",
+      color: 'white',
+      textDecoration: 'none',
+      padding: '10px 20px',
+      fontSize: '16px',
+      display: 'inline-block',
+      textAlign: centerText,
     },
     header: {
       marginTop: '30px',
@@ -52,7 +52,7 @@ export const mainStyles = {
       display: 'flex',
       justifyContent: 'space-around',
       marginTop: '40px',
-      flexWrap: 'wrap' as 'wrap',
+      flexWrap: 'wrap' as const,
     },
     featureBox: {
       backgroundColor: '#ffffff',
@@ -64,15 +64,15 @@ export const mainStyles = {
       textAlign: centerText,
     },
     button: {
-      backgroundColor: "#007BFF",
-      color: "white",
-      padding: "10px 20px",
-      border: "none",
-      borderRadius: "4px",
-      cursor: "pointer",
+      backgroundColor: '#007BFF',
+      color: 'white',
+      padding: '10px 20px',
+      border: 'none',
+      borderRadius: '4px',
+      cursor: 'pointer',
     },
     icon: {
-      marginRight: "8px",
-      fontSize: "18px",
+      marginRight: '8px',
+      fontSize: '18px',
     },
   };
