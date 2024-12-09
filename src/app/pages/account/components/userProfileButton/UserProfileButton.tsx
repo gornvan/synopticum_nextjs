@@ -9,7 +9,6 @@ import { useSession } from "next-auth/react"
 const UserProfileButton: React.FC = () => {
     const { data: sessionData, status } = useSession()
     const router = useRouter();
-    console.log(status);
 
     const handleLoginClick = () => {
       router.push("/api/auth/signin");
