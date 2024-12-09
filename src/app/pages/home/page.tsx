@@ -1,10 +1,8 @@
-import Image from "next/image";
-
 import React from 'react';
 import Link from 'next/link';  // Import Link for internal navigation in Next.js
 import { mainStyles } from '@/app/styles/mainStyles';
 import { HomePageProps } from "./HomePageProps";
-import UserProfileButton from "@/app/account/components/userProfileButton/UserProfileButton";
+import UserProfileButton from "@/app/pages/account/components/userProfileButton/UserProfileButton";
 
 // Hello page: accept the current user
 // if user provided - show their name

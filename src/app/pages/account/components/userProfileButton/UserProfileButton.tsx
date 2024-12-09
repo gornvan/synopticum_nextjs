@@ -4,13 +4,15 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { FaSignInAlt, FaCog } from "react-icons/fa"; // Using Font Awesome icons for UI
 import { mainStyles } from '@/app/styles/mainStyles';
+import { useSession } from "next-auth/react"
 
-
-const UserProfileButton: React.FC<UserProfileButtonProps> = ({ user }) => {
+const UserProfileButton: React.FC = () => {
+    const { data: sessionData, status } = useSession()
     const router = useRouter();
+    console.log(status);
 
     const handleLoginClick = () => {
-      router.push("/pages/account/login");
+      router.push("/api/auth/signin");
     };
 
     const handleProfileClick = () => {
@@ -19,12 +21,12 @@ const UserProfileButton: React.FC<UserProfileButtonProps> = ({ user }) => {
 
     return (
       <div style={styles.userProfileContainer}>
-        {user && user.token ? (
+        {sessionData?.user?.name ? (
           // If the user is logged in, show the profile settings button
           <div style={styles.profileContainer}>
             <button style={mainStyles.button} onClick={handleProfileClick}>
               <FaCog style={mainStyles.icon} />
-              <span style={styles.username}>{user.name}</span>
+              <span style={styles.username}>{sessionData.user.name}</span>
               <span className="tooltip">Profile settings</span>
             </button>
           </div>
