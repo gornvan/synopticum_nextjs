@@ -7,6 +7,7 @@ import { FetchForecastsParams, Forecast, SynopticumApiClient, WeatherSummary }
   from '@/app/apiClients/synopticum/SynopticumApiClient';
 
 import { useSession } from "next-auth/react"
+import GenericGrid from '@/app/components/genericGrid/GenericGrid';
 
 // Fetching forecasts
 async function getForecasts(client: SynopticumApiClient) {
@@ -17,10 +18,10 @@ async function getForecasts(client: SynopticumApiClient) {
       pageSize: 50,
       pageNumber: 1,
     };
-    const forecasts = await client.fetchForecasts("Belarus", "Minsk", params);
-    console.log("Fetched forecasts:", forecasts);
+    return await client.fetchForecasts("Belarus", "Minsk", params);
   } catch (error) {
     console.error("Error fetching forecasts:", error);
+    throw error;
   }
 }
 
@@ -42,7 +43,7 @@ async function postForecast(client: SynopticumApiClient) {
 
 
 // HomePage Component
-const ForecastsPage: React.FC = () => {
+const ForecastsPage: React.FC = async () => {
       const { data: sessionData, status: sessionStatus } = useSession();
       
         const client = new SynopticumApiClient(sessionData?.accessToken ?? "");
@@ -51,10 +52,13 @@ const ForecastsPage: React.FC = () => {
         postForecast(client);
       }
 
-      var forecasts = getForecasts(client);
+      var forecasts = await getForecasts(client);
 
       return (
       <div style={mainStyles.container}>
+        <GenericGrid data={forecasts}>
+          
+        </GenericGrid>
       </div>
     );
   };
