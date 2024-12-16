@@ -1,52 +1,51 @@
 import React from "react";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 
-// Type for the GenericGrid component props
+// Type for GenericGrid component props
 interface GenericGridProps<T> {
   data: T[]; // Collection of objects
+  enumMap?: { [key: string]: { [key: number]: string } }; // Optional map for Enums
 }
 
 const GenericGrid = <T extends object>({
   data,
+  enumMap = {},
 }: GenericGridProps<T>) => {
   if (data.length === 0) return <div>No data to display.</div>;
 
-  // Extract keys dynamically from the first object
+  // Extract keys dynamically to create columns
   const keys = Object.keys(data[0]) as (keyof T)[];
 
-  // Function to resolve Enum values
-  const resolveValue = (key: keyof T, value: any): string | number => {
-    return value;
-  };
+  // Create Material UI columns dynamically
+  const columns: GridColDef[] = keys.map((key) => ({
+    field: key as string,
+    headerName: key.toString().toUpperCase(), // Display key as header
+    flex: 1, // Flexible column width
+    valueGetter: (value: any) => {
+      // Resolve Enums if necessary
+      if (typeof value === "number" && enumMap[key as string]) {
+        return enumMap[key as string][value] || value;
+      }
+      return value;
+    },
+  }));
+
+  // Add an `id` field for DataGrid to track rows
+  const rows = data.map((item, index) => ({ id: index, ...item }));
 
   return (
-    <table style={{ borderCollapse: "collapse", width: "100%" }}>
-      <thead>
-        <tr>
-          {keys.map((key) => (
-            <th
-              key={key as string}
-              style={{ border: "1px solid black", padding: "8px", textAlign: "left" }}
-            >
-              {key.toString()}
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((item, rowIndex) => 
-          <tr key={rowIndex}>
-            {keys.map((key) => (
-              <td
-                key={key as string}
-                style={{ border: "1px solid black", padding: "8px" }}
-              >
-                {resolveValue(key, item[key])}
-              </td>
-            ))}
-          </tr>
-        )}
-      </tbody>
-    </table>
+    <div style={{ height: 400, width: "100%" }}>
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        pageSizeOptions={[5, 10, 25]}
+        initialState={{
+          pagination: {
+            paginationModel: { pageSize: 5, page: 0 },
+          },
+        }}
+      />
+    </div>
   );
 };
 
