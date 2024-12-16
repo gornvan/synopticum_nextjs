@@ -4,11 +4,14 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { FaSignInAlt, FaCog } from "react-icons/fa"; // Using Font Awesome icons for UI
 import { mainStyles } from '@/app/styles/mainStyles';
+
 import { useSession } from "next-auth/react"
+import { signOut } from "next-auth/react"
 
 const UserProfileButton: React.FC = () => {
     const { data: sessionData, status } = useSession()
     const router = useRouter();
+    console.log(sessionData);
 
     const handleLoginClick = () => {
       router.push("/api/auth/signin");
@@ -26,7 +29,12 @@ const UserProfileButton: React.FC = () => {
             <button style={mainStyles.button} onClick={handleProfileClick}>
               <FaCog style={mainStyles.icon} />
               <span style={styles.username}>{sessionData.user.name}</span>
-              <span className="tooltip">Profile settings</span>
+              <span className="tooltip">
+                Profile settings
+              </span>
+            </button>
+            <button style={mainStyles.button} onClick={() => signOut()}>
+              Sign out
             </button>
           </div>
         ) : (
