@@ -38,9 +38,6 @@ export class SynopticumApiClient {
     if (!baseUrl) {
       throw new Error("API base URL must be provided or set in the environment variable NEXT_SYNOPTICUM_API_BASEURL.");
     }
-    if (!token) {
-      throw new Error("Authentication token must be provided.");
-    }
 
     this.baseUrl = baseUrl;
     this.token = token;
@@ -118,6 +115,9 @@ export class SynopticumApiClient {
     city: string,
     forecast: Forecast
   ): Promise<void> {
+    if (!this.token) {
+      throw new Error("Authentication token must be provided.");
+    }
     const path = `/WeatherForecast/countries/${country}/cities/${city}`;
     await this.sendRequest<void>("POST", path, undefined, forecast);
   }
