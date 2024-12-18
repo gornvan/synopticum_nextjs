@@ -3,6 +3,7 @@ import { Container, Typography, CircularProgress, Alert } from "@mui/material";
 import { Forecast, SynopticumApiClient, WeatherSummary }
   from "@/app/apiClients/synopticum/SynopticumApiClient";
 import ForecastsGrid from "./ForecastsGrid";
+import NewForecastForm from "./NewForecastForm";
 
 // Creating a forecast
 async function postForecast(client: SynopticumApiClient) {
@@ -21,7 +22,7 @@ async function postForecast(client: SynopticumApiClient) {
 
 const ForecastsGridPage = () => {
   return <Container>
-    
+    <NewForecastForm country="Belarus" city="Minsk"></NewForecastForm>
     <ForecastsGrid></ForecastsGrid>
   </Container>
 }
