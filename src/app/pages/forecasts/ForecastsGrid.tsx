@@ -13,8 +13,12 @@ const ForecastsGrid = () => {
 
     useEffect(() => {
         const fetchData = async () => {
+            if(!client){
+                return;
+            }
+
             try {
-                const data = await client!.fetchForecasts("Belarus", "Minsk", {
+                const data = await client.fetchForecasts("Belarus", "Minsk", {
                     minTemperatureC: 1,
                     maxTemperatureC: 20,
                     pageSize: 50,
@@ -29,7 +33,7 @@ const ForecastsGrid = () => {
         };
 
         fetchData();
-    }, []);
+    }, [client]);
 
     // Enum mapping for the grid
     const enumMap = {
