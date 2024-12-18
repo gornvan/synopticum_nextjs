@@ -54,15 +54,19 @@ export class SynopticumApiClient {
   private async sendRequest<T>(
     method: "GET" | "POST" | "PUT" | "DELETE",
     path: string,
-    queryParams?: Record<string, string | number>,
+    queryParams?: any,
     body?: any
   ): Promise<T> {
     // Construct the full URL with query parameters
     const url = new URL(`${this.baseUrl}${path}`);
     if (queryParams) {
+      const searchParams = new URLSearchParams();
       Object.entries(queryParams).forEach(([key, value]) => {
-        url.searchParams.append(key, value.toString());
+        if (value !== undefined && value !== null) {
+          searchParams.append(key, value.toString());
+        }
       });
+      url.search = searchParams.toString();
     }
 
     // Prepare request options
