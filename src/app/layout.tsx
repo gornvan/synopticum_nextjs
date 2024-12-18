@@ -4,6 +4,7 @@ import "./globals.css";
 import SessionProviderWrapper from "./account/SessionProviderWrapper";
 
 import { Navigation } from '@/app/layout/navigation';
+import { SynopticumApiClientProviderWrapper } from "./apiClients/synopticum/SynopticumApiClientProviderWrapper";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -31,8 +32,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
           <SessionProviderWrapper>
+            <SynopticumApiClientProviderWrapper>
             <Navigation/>
             {children}
+            </SynopticumApiClientProviderWrapper>
           </SessionProviderWrapper>
       </body>
     </html>
