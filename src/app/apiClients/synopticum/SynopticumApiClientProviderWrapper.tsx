@@ -9,7 +9,7 @@ interface ApiClientContextType {
   client: SynopticumApiClient | null;
 }
 
-const ApiClientContext = createContext<ApiClientContextType | undefined>(
+const apiClientContext = createContext<ApiClientContextType | undefined>(
   undefined
 );
 
@@ -38,15 +38,15 @@ export const SynopticumApiClientProviderWrapper = ({
   }
 
   return (
-    <ApiClientContext.Provider value={{ client }}>
+    <apiClientContext.Provider value={{ client }}>
       {children}
-    </ApiClientContext.Provider>
+    </apiClientContext.Provider>
   );
 };
 
 // Custom hook for consuming the context
 export const useSynopticumApiClient = () => {
-  const context = useContext(ApiClientContext);
+  const context = useContext(apiClientContext);
   if (!context) {
     throw new Error(
       "useSynopticumApiClient must be used within a SynopticumApiClientProviderWrapper"
